@@ -1,8 +1,8 @@
 import styles from "./actionButton.module.css";
 import { motion } from "framer-motion";
-import { forwardRef, Children } from "react";
+import { forwardRef, children } from "react";
 
-const ActionButton = forwardRef(({ onClick = () => {}, reload = false, Children}, ref) => {
+const ActionButton = forwardRef(({ onClick = () => {}, reload = false, children}, ref) => {
     const handleClick = (e) => {
         onClick(e)
         if(reload){
@@ -15,7 +15,7 @@ const ActionButton = forwardRef(({ onClick = () => {}, reload = false, Children}
             onClick={(e)=>handleClick(e)}
             className={styles.actionButton}
         >
-            {Children || "Submit"}
+            {children || "Submit"}
         </button>
     );
 });

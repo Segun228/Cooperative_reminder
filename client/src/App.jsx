@@ -9,6 +9,8 @@ import HomePage from "./pages/homePage/HomePage.jsx"
 import CabinetPage from './pages/cabinetPage/CabinetPage.jsx';
 import LoginPage from './pages/loginPage/LogInPage.jsx';
 import RegisterPage from './pages/registerPage/RegisterPage.jsx';
+import RequireAuth from './security/RequireAuth.jsx';
+import RequireAdmin from './security/RequireAdmin.jsx';
 
 
 function App() {
@@ -19,10 +21,11 @@ function App() {
         <Route path='*' element={<NotFoundPage></NotFoundPage>}></Route>
         <Route path='/' element={<Layout></Layout>}>
           <Route path='' element={<HomePage></HomePage>} />
-          <Route path='cabinet' element={<CabinetPage></CabinetPage>} />
+          <RequireAuth><Route path='cabinet' element={<CabinetPage></CabinetPage>} /></RequireAuth>
           <Route path='create' element={<CabinetPage></CabinetPage>} />
           <Route path='login' element={<LoginPage></LoginPage>} />
           <Route path='register' element={<RegisterPage></RegisterPage>} />
+          <RequireAdmin><Route path='admin' element={<AdminPage></AdminPage>} /></RequireAdmin>
         </Route>
       </Routes>
     </>
