@@ -3,13 +3,13 @@ import { motion } from "framer-motion";
 import { forwardRef } from "react";
 
 const ActionButton = forwardRef(
-    ({ onClick = () => {}, reload = false, children }, ref) => {
+    ({ onClick = () => {}, reload = false, children, type }, ref) => {
         const handleClick = (e) => {
-        onClick(e);
-        console.log(children)
-        if (reload) {
-            window.location.reload();
-        }
+            if (type !== "submit") {
+                e.preventDefault();
+                onClick(e);
+                if (reload) window.location.reload();
+            }
         };
 
         return (
@@ -17,6 +17,7 @@ const ActionButton = forwardRef(
             ref={ref}
             onClick={handleClick}
             className={styles.actionButton}
+            type={type || "button"}
         >
             {children || "Submit"}
         </button>

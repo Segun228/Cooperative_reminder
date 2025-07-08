@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     width: 100vw;
-    height: 120vh;
+    height: 150%;
     z-index: 1;
     display: flex;
     background-color: rgba(157, 157, 157, 0.8);
@@ -60,6 +60,7 @@
     z-index: 2;
     left: 30vw;
     top: 10vh;
+    margin-bottom: 20vh;
     height: max-content;
     display: flex;
     flex-direction: column;
