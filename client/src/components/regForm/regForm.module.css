@@ -66,7 +66,7 @@
     row-gap: 3vh;
     padding: calc(1.8*var(--index));
     background: white;
-    max-height: 90vh;
+    height: fit-content;
     overflow-y: auto;
     animation: slideUp 0.3s ease-out;
 }

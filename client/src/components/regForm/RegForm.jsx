@@ -1,12 +1,11 @@
 import style from "./regForm.module.css"
-import ActionButton from "../actionButton/ActionButton";
+import ActionButton from "./../UI/actionButton/ActionButton";
 import { MdOutlineCancel } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useEffect } from "react";
-import HandleRegisterUser from "./../../../store/middleware functions/HandleRegisterUser";
 import { useLocation, useNavigate, Navigate } from "react-router-dom";
-import EyeIcon from "../../../pages/cabinetPage/subcomponents/eyeIcon/EyeIcon";
+import EyeIcon from "./../eyeIcon/EyeIcon";
 const RegisterForm = ({initialOpen = true}) => {
     const [regError, setRegError] = useState("");
     const [input1Type, changeInput1Type] = useState(false);
@@ -34,9 +33,9 @@ const RegisterForm = ({initialOpen = true}) => {
         catch(error){
             //console.log("Popalsa")
             if (error.response?.status == 409) {
-                setRegError("Такой пользователь уже существует");
+                setRegError("User with this email already exists");
             } else {
-                setRegError("Ошибка регистрации. Попробуйте позже.");
+                setRegError("Registration error. Try again later");
             }
             console.error(error);
         }
@@ -70,44 +69,58 @@ const RegisterForm = ({initialOpen = true}) => {
                         <input 
                         className={errors.email ? style.input_err : style.input} 
                         type="email" 
-                        placeholder="Введите вашу почту..."
+                        placeholder="Enter your email..."
                         {...register('email', {
-                            required: "Поле обязательно к заполнению",
+                            required: "This field in necessary",
                             minLength: {
                                 value: 5,
-                                message: "Слишком короткая почта"
+                                message: "Too short email"
                             },
                             maxLength: {
                                 value: 100,
-                                message: "Слишком длинная почта"
+                                message: "Too long email"
                             },
                             pattern: {
                                 value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-                                message: "Неверный формат почты"
+                                message: "Incorrect email format"
                             },
                             
                         })}
                         />
                         {errors.email && <div className={style.error_warning}>{errors.email.message}</div>}
+                        <input 
+                        className={errors.telegram ? style.input_err : style.input} 
+                        type="telegram" 
+                        placeholder="Enter your TG: @..."
+                        {...register('email', {
+                            required: false,
+                            pattern: {
+                                value: /^@[\w]{5,32}$/,
+                                message: "Incorrect telegram ID format"
+                            },
+                            
+                        })}
+                        />
+                        {errors.telegram && <div className={style.error_warning}>{errors.telegram.message}</div>}
                         <div className={style.inputContainer}>
                             <input 
                             style={{width:"100%"}}
                             className={errors.password ? style.input_err : style.input} 
-                            placeholder="Создайте пароль..."
+                            placeholder="Create new password..."
                             type={input1Type ? "text" : "password"}
                             {...register('password', {
-                                required: "Поле обязательно к заполнению",
+                                required: "This field in necessary",
                                 minLength: {
                                     value: 8,
-                                    message: "Слишком короткий пароль"
+                                    message: "Too short password"
                                 },
                                 maxLength: {
                                     value: 100,
-                                    message: "Слишком длинный пароль"
+                                    message: "Too long password"
                                 },
                                 pattern: {
                                     value: /^[a-zA-Z0-9!@#\$%\^\&*_=+-]{8,12}$/g,
-                                    message: "Неверный формат пароля"
+                                    message: "Incorrect password format"
                                 },
                             })}
                             />
@@ -119,23 +132,23 @@ const RegisterForm = ({initialOpen = true}) => {
                             style={{width:"100%"}}
                             className={errors.confirm ? style.input_err : style.input} 
                             type={input2Type ? "text" : "password"}
-                            placeholder="Подтвердите ваш пароль..." 
+                            placeholder="Confirm your password..." 
                             {...register('confirm', {
-                                required: "Поле обязательно к заполнению",
+                                required: "This field is necessary",
                                 minLength: {
                                     value: 8,
-                                    message: "Слишком короткий пароль"
+                                    message: "Too short password"
                                 },
                                 maxLength: {
                                     value: 100,
-                                    message: "Слишком длинный пароль"
+                                    message: "Too long password"
                                 },
                                 pattern: {
                                     value: /^[a-zA-Z0-9!@#\$%\^\&*_=+-]{8,12}$/g,
-                                    message: "Неверный формат пароля"
+                                    message: "Incorrect password format"
                                 },
                                 validate: (value) =>
-                                    value === password || "Пароли не совпадают"
+                                    value === password || "Passwords do not match"
                             })}
                             />
                             <EyeIcon handleVisible={changeInput2Type} />
@@ -147,17 +160,17 @@ const RegisterForm = ({initialOpen = true}) => {
                             type="checkbox" 
                             id="myCheckbox"
                             {...register('joke', {
-                                required: "Поле обязательно к подтверждению",
+                                required: "This checkbox is necessary",
                             })}
                             />
-                            <label className={style.checkboxCaption} htmlFor="myCheckbox">Обязуюсь отказаться от необоснованных оскорблений, оставив только обоснованные.</label>
+                            <label className={style.checkboxCaption} htmlFor="myCheckbox">I understand and agree with the privacy terms of use</label>
                         </div>
                         {errors.joke && <div className={style.error_warning}>{errors.joke.message}</div>}
                         {regError && <div className={style.error_warning}>{regError}</div>}
-                        <ActionButton disabled={Object.keys(errors).length > 0 || isSubmitting} text={isSubmitting ? "Загрузка..." : "Отправить"} type="submit"></ActionButton>
+                        <ActionButton disabled={Object.keys(errors).length > 0 || isSubmitting} type="submit">{isSubmitting ? "Loading..." : "Submit"}</ActionButton>
                             <div className={style.regCaption} onClick={()=> handleRedirect()}>
-                                Уже есть аккаунт?<br />
-                                <span className={style.regMainCaption}>Вход</span>
+                                Already have an account?<br />
+                                <span className={style.regMainCaption}>Log in</span>
                             </div>
                     </form>
                 </div>
