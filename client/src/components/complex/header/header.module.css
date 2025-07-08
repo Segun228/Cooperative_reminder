@@ -22,9 +22,6 @@
     cursor: pointer;
 }
 
-.logo{
-    width: calc(3*var(--index));
-}
 
 
 .textContainer{
@@ -39,14 +36,19 @@
 .title{
     font-weight: 700;
     font-size: calc(1.5*var(--index));
+    width: max-content;
 }
 
-
+.logo{
+    width: 3.5vw;
+    color: white;
+}
 
 .caption{
     font-weight: 250;
     font-size: calc(0.75*var(--index));
     letter-spacing: calc(0.065*var(--index));
+    width: max-content;
 }
 
 .navigation{

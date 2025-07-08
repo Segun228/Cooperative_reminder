@@ -1,0 +1,1 @@
+const selectHabits = (state) => state.main.habits
