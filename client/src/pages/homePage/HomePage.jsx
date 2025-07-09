@@ -7,14 +7,18 @@ import POSThabit from "../../api/requests/POSThabit";
 import PUThabit from "../../api/requests/PUThabit";
 import DELETEhabit from "../../api/requests/DELETEhabit";
 import { useEffect, useState } from "react";
+import EditHabitModal from "../../components/UI/editHabitModal/EditHabitModal";
 
 const CabinetPage = () => {
-    const [open, setOpen] = useState(true)
+    const [open, setOpen] = useState(false)
+    const [editOpen, setEditOpen] = useState(false)
     return(
         <>
             <ActionButton>Some shit</ActionButton>
-            <ActionButton onClick={()=>{setOpen(!open)}}>damn</ActionButton>
+            <ActionButton onClick={()=>{setOpen(!open)}}>create</ActionButton>
+            <ActionButton onClick={()=>{setEditOpen(!editOpen)}}>update</ActionButton>
             <CreateHabitModal initialOpen={open} setInitial={setOpen}/>
+            <EditHabitModal initialOpen={editOpen} setInitial={setEditOpen}/>
         </>
     );
 }

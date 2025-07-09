@@ -1,12 +1,12 @@
-import styles from "./createHabitModal.module.css"
+import styles from "./editHabitModal.module.css"
 import ActionButton from "../actionButton/ActionButton";
 import { MdOutlineCancel } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import CreateHabitField from "../createHabitField/CreateHabitField";
-import POSThabit from "../../../api/requests/POSThabit";
+import EditHabitField from "../editHabitField/EditHabitField";
+import PUThabit from "../../../api/requests/PUThabit";
 
-const CreateHabitModal = ({initialOpen, setInitial}) => {
+const EditHabitModal = ({initialOpen, setInitial, habit}) => {
     
     const [open, setOpen] = useState(initialOpen || false);
     const [error, setError] = useState(null)
@@ -30,23 +30,23 @@ const CreateHabitModal = ({initialOpen, setInitial}) => {
     }
     
 
-    const createPost = async ({
+    const editPost = async ({
         name,
         body,
         frequency,
         time,
         timeZone,
-        startDate
     }) => {
+        setError(null);
         const data = {
             name,
             description: body,
             frequency,
             remind_time: time,
             timezone: timeZone,
-            start_date: startDate
         }
-        const response = await POSThabit(data)
+        const response = await PUThabit(data, habit?.id)
+        console.log("error response", response)
         if(response?.error){
             setError(response?.error)
             setInitial(true)
@@ -64,15 +64,15 @@ const CreateHabitModal = ({initialOpen, setInitial}) => {
                     <div className={styles.background}></div>
                     <div className={styles.wrapper} onClick={(e) => e.stopPropagation()}>
                         <MdOutlineCancel className={styles.cancel} onClick={()=>{handleClose()}} />
-                        <div className={styles.title}>New habit</div>
+                        <div className={styles.title}>Edit habit</div>
                         {userID && 
                             <>
-                                <CreateHabitField sender={createPost}/>
+                                <EditHabitField sender={editPost} data={habit}/>
                                 {error && 
                                 <div style={{
                                     color:"red"
                                 }}>
-                                    An error while creating a post
+                                    An error while editing a habit
                                 </div>}
                             </>
                         }
@@ -86,4 +86,4 @@ const CreateHabitModal = ({initialOpen, setInitial}) => {
     );
 }
 
-export default CreateHabitModal;
+export default EditHabitModal;

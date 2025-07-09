@@ -1,8 +1,8 @@
 import api from "./../api"
-import { BASE_URL } from "../../../config"
+import { BASE_URL, USER } from "../../../config"
 
 const POSThabit = async ({name, description, frequency, remind_time, timezone, start_date}) => {
-    const NEW_URL = BASE_URL + "api/habits/"
+    const NEW_URL = BASE_URL + USER
     try{
         if(!name || !description || !frequency || !remind_time || !timezone || !start_date){
             throw new Error("Invalid fields of a habit given")
