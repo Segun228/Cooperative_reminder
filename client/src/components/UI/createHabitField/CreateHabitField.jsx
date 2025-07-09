@@ -26,7 +26,13 @@ const handleSubmit = (e) => {
         startDate: startDateISO
     };
     if (typeof sender === "function") {
-        sender(habitData);
+        sender(habitData)
+        setName("")
+        setBody("")
+        setFrequency("")
+        setTime("")
+        setTimeZone("")
+        setStartDate("")
     }
 }
 

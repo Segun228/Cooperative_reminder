@@ -3,6 +3,7 @@ import {jwtDecode} from "jwt-decode"
 import api from "./../api/api.js";
 import {REFRESH_TOKEN, ACCESS_TOKEN} from "./../../config.js"
 import { children, useEffect, useState } from "react";
+import Loader from "../components/loader/Loader.jsx";
 
 const RequireAuth = ({children}) => {
     const [isAuthorized, setIsAuthorized] = useState(null)
@@ -59,7 +60,9 @@ const RequireAuth = ({children}) => {
     }
 
     if(isAuthorized === null){
-        return <div>Loading...</div>
+        return(
+            <Loader />
+        )
     }
 
     return isAuthorized ? children : <Navigate to="/login" />

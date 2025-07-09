@@ -13,6 +13,7 @@ import AdminPage from './pages/adminPage/AdminPage.jsx';
 import RequireAuth from './security/RequireAuth.jsx';
 import RequireAdmin from './security/RequireAdmin.jsx';
 import OAuthPage from './pages/OAuthPage/OAuthPage.jsx'
+import CreatePage from './pages/createPage/createPage.jsx';
 
 
 
@@ -26,7 +27,7 @@ function App() {
           <Route path='' element={<RequireAuth><HomePage></HomePage></RequireAuth>} />
           <Route path='cabinet' element={<RequireAuth><CabinetPage></CabinetPage></RequireAuth>} />
           <Route path='dashboard' element={<RequireAuth><CabinetPage></CabinetPage></RequireAuth>} />
-          <Route path='create' element={<RequireAuth><CabinetPage></CabinetPage></RequireAuth>} />
+          <Route path='create' element={<RequireAuth><CreatePage></CreatePage></RequireAuth>} />
           <Route path='login' element={<LoginPage></LoginPage>} />
           <Route path='oauth' element={<OAuthPage></OAuthPage>} />
           <Route path='register' element={<RegisterPage></RegisterPage>} />

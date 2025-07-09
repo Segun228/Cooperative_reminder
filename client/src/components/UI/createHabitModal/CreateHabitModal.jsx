@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import CreateHabitField from "../createHabitField/CreateHabitField";
 import POSThabit from "../../../api/requests/POSThabit";
 
-const CreateHabitModal = ({initialOpen, setInitial}) => {
+const CreateHabitModal = ({initialOpen, setInitial, onClose, submitter}) => {
     
     const [open, setOpen] = useState(initialOpen || false);
     const [error, setError] = useState(null)
@@ -23,6 +23,7 @@ const CreateHabitModal = ({initialOpen, setInitial}) => {
     const handleClose = () => {
         setOpen(false)
         setInitial(false)
+        onClose()
     }
 
     const handleRedirect = ()=>{
@@ -55,6 +56,9 @@ const CreateHabitModal = ({initialOpen, setInitial}) => {
         else{
             setInitial(false)
             setOpen(false)
+            setTimeout(100)
+            setInitial(true)
+            setOpen(true)
         }
     }
     return( 

@@ -4,7 +4,6 @@ import { BASE_URL } from "../../../config";
 
 const GithubButton = ({ text = "Login via GitHub", redirectUrl }) => {
     const handleClick = () => {
-
         window.location.href = redirectUrl ?? BASE_URL+"auth/github/";
     };
 

@@ -4,14 +4,16 @@ import styles from "./header.module.css"
 import {LayoutGroup, AnimatePresence} from 'framer-motion'
 import { useLocation } from "react-router-dom";
 import Line from "./subcomponents/Line";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { AiFillBulb } from "react-icons/ai";
+import getUserName from "../../../helpers/getUserName";
 
 const Header = () => {
     const [activeIndex, setActiveIndex] = useState(-1);
-    const [username, setUsername] = useState("");
+    const [username, setUsername] = useState(null);
     const [isMenuOpen, setMenuOpen] = useState(false);
-
+    const store_username = useSelector(state => state.main.username)
+    const dispatch = useDispatch()
 
     const handleClick = (ind) => {
         setActiveIndex(ind);
@@ -23,11 +25,19 @@ const Header = () => {
         switch (location.pathname) {
             case "/": return 0;
             case "/create": return 1;
-            case "/cabinet": return 2;
+            case "/dashboard": return 2;
+            case "/cabinet": return 3;
             default: return -1;
         }
     })();
 
+    useEffect(()=>{
+        const fetchUsername = async () => {
+            const username_buf = await getUserName(dispatch)
+            setUsername(username_buf || store_username || "Log in")
+        }
+        fetchUsername()
+    }, [store_username])
     return (
         <>
             <div className={styles.wrapper}>
@@ -65,7 +75,7 @@ const Header = () => {
                             <AnimatePresence>
                                 {activeCurrentIndex === 3 && <Line />}
                             </AnimatePresence>
-                            <div onClick={() => handleClick(3)} className={styles.navItem}>Cabinet</div>
+                            <div onClick={() => handleClick(3)} className={styles.navItem}>{username || store_username || "Log in"}</div>
                         </NavLink>
                     </div>
                 </LayoutGroup>
@@ -83,12 +93,12 @@ const Header = () => {
 
             <div className={`${styles.sideMenu} ${isMenuOpen ? styles.sideMenuOpen : ""}`}>
                 <NavLink to="/cabinet" onClick={() => handleClick(3)} className={styles.navSideItem}>
-                    {username || "Вход"}
+                    {username || "Log in"}
                 </NavLink>
                 <NavLink to="/" onClick={() => handleClick(0)} className={styles.navSideItem}>Home</NavLink>
                 <NavLink to="/create" onClick={() => handleClick(1)} className={styles.navSideItem}>Create</NavLink>
                 <NavLink to="/dashboard" onClick={() => handleClick(2)} className={styles.navSideItem}>Dashboard</NavLink>
-                <NavLink to="/cabinet" onClick={() => handleClick(3)} className={styles.navSideItem}>Cabinet</NavLink>
+                <NavLink to="/cabinet" onClick={() => handleClick(3)} className={styles.navSideItem}>{username || store_username || "Log in"}</NavLink>
             </div>
         </>
     );
