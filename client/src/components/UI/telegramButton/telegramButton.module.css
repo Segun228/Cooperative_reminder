@@ -1,0 +1,37 @@
+.button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 11.5vh;
+    min-width: 15vw;
+    border-radius: 5vh;
+    background-color: #24A1DE;
+    color: white;
+    gap: 0.7vw;
+    transition: all 0.2s ease-out;
+    border: none;
+}
+
+.icon{
+    width: 7vh;
+}
+
+.caption{
+    font-size: 3vh;
+    font-weight: 600;
+}
+
+.button:hover:not(:disabled) {
+    background-color: #25aaec;
+    transform: translateY(-0.4vh) scale(1.01);
+    box-shadow: 0px 15px 20px -12px rgba(0, 0, 0, 0.8);
+    transition: all 0.2s ease-out;
+}
+
+.button:active:not(:disabled) {
+    background-color: #11597d;
+    transform: translateY(0.4vh) scale(1);
+    box-shadow: none;
+    transition: all 0.2s ease-out;
+}
