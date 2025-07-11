@@ -8,7 +8,6 @@ const GETme = async (dispatch) => {
     const NEW_URL = BASE_URL + ME_URL
     try{
         const response = await api.get(NEW_URL)
-        console.log(response?.data)
         dispatch(setUserInfo(response?.data))
         return response?.data
     }

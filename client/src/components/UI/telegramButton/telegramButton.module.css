@@ -34,4 +34,5 @@
     transform: translateY(0.4vh) scale(1);
     box-shadow: none;
     transition: all 0.2s ease-out;
+    color: #aeaeae
 }

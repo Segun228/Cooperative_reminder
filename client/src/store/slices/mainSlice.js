@@ -5,6 +5,7 @@ const mainSlice = createSlice({
     initialState: {
         userID: null,
         username: "",
+        telegramID: null,
         habits: [
 
         ],
@@ -29,6 +30,7 @@ const mainSlice = createSlice({
         setUserInfo(state, action){
             state.userID = action?.payload?.id
             state.username = action?.payload?.username
+            state.username = action?.payload?.telegram_id || null
         }
     }
 }

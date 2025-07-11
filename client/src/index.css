@@ -10,6 +10,7 @@
 
     --font-family: Raleway, Roboto, sans-serif;
     --title-font: calc(2*var(--index));
+    --subtitle-font: calc(1.5*var(--index));
     --primary-font: calc(1.2*var(--index));
     --subprimary-font: calc(1.0*var(--index));
     --caption-font: calc(0.8*var(--index));

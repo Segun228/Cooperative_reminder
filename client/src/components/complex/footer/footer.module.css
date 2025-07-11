@@ -39,11 +39,62 @@
 .wrapper{
     width: 100%;
     min-height: 20vh;
-    background-color: black;
+    background-color: rgb(16, 1, 24);
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: start;
+    padding: var(--page-main-padding);
+    gap: 10%;
+    color: white;
+}
+
+
+.title{
+    font-size: var(--subtitle-font);
+    font-weight: 600;
+}
+
+
+.caption{
+    font-size: var(--caption-font);
+    line-height: 150%;
+}
+
+
+.namecaption{
+    font-size: var(--primary-font);
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+
+.devblock{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 2vw;
+}
+
+
+
+.section{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    padding: calc(2*var(--left-padding));
-    gap: calc(1.5*var(--left-padding));
+    gap: 3vh;
+    height: 100%;
+}
+
+
+.logo {
+    width: 4vw;
+    height: 4vw;
+    display: inline-block;
+    color: white;
+    line-height: 1;
 }
