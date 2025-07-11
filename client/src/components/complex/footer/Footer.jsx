@@ -41,18 +41,22 @@ const Footer = () => {
         <section className={styles.section} style={{width:"30%"}}>
             <div className={styles.title} >Developers</div>
             <div className={styles.devblock}>
-                <div className={styles.container}>
-                    <IoLogoGithub className={styles.logo}/>
-                    <div className={styles.namecaption}>
-                        Mattwix
+                <a href="https://github.com/MatTwix">
+                    <div className={styles.container}>
+                        <IoLogoGithub className={styles.logo}/>
+                        <div className={styles.namecaption}>
+                            MatTwix
+                        </div>
                     </div>
-                </div>
-                <div className={styles.container}>
-                    <IoLogoGithub className={styles.logo}/>
-                    <div className={styles.namecaption}>
-                        Segun228
+                </a>
+                <a href="https://github.com/Segun228">
+                    <div className={styles.container}>
+                        <IoLogoGithub className={styles.logo}/>
+                        <div className={styles.namecaption}>
+                            Segun228
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div className={styles.caption} >Check out our other projects</div>
         </section>

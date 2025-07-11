@@ -1,3 +1,65 @@
 .wrapper{
     padding: var(--page-main-padding);
+    display: flex;
+    flex-direction: column;
+    gap: var(--page-vertical-gap)
+}
+
+
+.input{
+    height: 8vh;
+    width: 30vw;
+    position: relative;
+    z-index: 1;
+    background-color: #e7e7e7;
+    padding: calc(1*var(--index));
+    border-radius: calc(0.9*var(--index));
+    transition: all 0.3s ease-out;
+    resize: none;   
+    border: none;  
+    outline: none;  
+    font-size:var(--caption-font);
+}
+
+
+.title{
+    font-size: var(--subtitle-font);
+    font-weight: 700;
+}
+
+.field{
+    position: relative;
+    z-index: 1;
+    width:30vw;
+    background-color: #e7e7e7;
+    padding: calc(1*var(--index));
+    border-radius: calc(0.9*var(--index));
+    padding-inline: calc(1.2*var(--index));
+    padding-top: calc(1*var(--index));
+    transition: all 0.3s ease-out;
+    resize: none;   
+    border: none;  
+    outline: none;  
+    font-size:var(--caption-font);
+    min-height: 15vh;
+    height: auto;
+}
+
+.caption{
+    font-size: var(--caption-font);
+    line-height: 150%;
+    color: var(--light-grey);
+}
+
+
+.section{
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
 }

@@ -71,6 +71,7 @@
     flex-direction: row;
     align-items: center;
     gap: 0.5vw;
+    transition: all 0.2s ease-out;
 }
 
 
@@ -97,4 +98,11 @@
     display: inline-block;
     color: white;
     line-height: 1;
+    transition: all 0.2s ease-out;
+}
+
+
+.container:hover  .logo{
+    transform: translateY(-1vh);
+    transition: all 0.2s ease-out;
 }

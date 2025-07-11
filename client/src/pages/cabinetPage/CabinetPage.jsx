@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import GETme from "../../api/requests/GETme";
 import { BOT_URL } from "../../../config";
+import ActionButton from "../../components/UI/actionButton/ActionButton";
 
 const CabinetPage = () => {
     const dispatch = useDispatch()
@@ -15,6 +16,7 @@ const CabinetPage = () => {
     const [username, setUsername] = useState(null)
     const [telegramID, setTelegramID] = useState("")
     const [userID, setUserID] = useState("")
+    const [feedback, setFeedback] = useState("")
     const [changableTG, setChangableTG] = useState("")
     const username_fallback = useSelector(state => state.main?.username)
     const tg_fallback = useSelector(state => state.main?.telegramID)
@@ -41,9 +43,23 @@ const CabinetPage = () => {
     return(
         <>
             <div className={styles.wrapper}>
-                <div>Hello, {username || "User"}</div>
-                <div>Turn on BOT notifications to stay consistent</div>
-                <TelegramButton disabled={!userID} onClickFunction={()=>{window.location.href = (BOT_URL)}}/>
+                <div className={styles.title}>Hello, {username || "User"}</div>
+
+                <section className={styles.section}>
+                    <div className={styles.caption}>Turn on BOT notifications to stay consistent</div>
+                    <TelegramButton disabled={!userID} onClickFunction={()=>{window.location.href = (BOT_URL)}}/>
+                </section>
+                <form className={styles.form} onSubmit={(e)=>{e.preventDefault()}}>
+                    <div className={styles.caption}>You can leave your comliants or suggestions there</div>
+                    <textarea  
+                        placeholder={"Express yourself..."}
+                        className={styles.field}
+                        name="answer"
+                        value={feedback}
+                        onChange={(e) => setFeedback(e.target.value)}
+                    />
+                    <ActionButton type="submit">Send</ActionButton>
+                </form>
             </div>
         </>
     );
