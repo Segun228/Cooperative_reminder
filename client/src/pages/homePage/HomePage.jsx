@@ -11,10 +11,11 @@ import EditHabitModal from "../../components/UI/editHabitModal/EditHabitModal";
 import HabitCard from "../../components/habitCard/HabitCard";
 import { uid } from "uid";
 import DeleteHabitModal from "../../components/UI/deleteHabitModal/DeleteHabitModal";
+import HabitList from "../../components/sortableHabit/SortableHabit";
+import Loader from "../../components/loader/Loader";
 
 const CabinetPage = () => {
-    const [open, setOpen] = useState(false)
-    const [editOpen, setEditOpen] = useState(false)
+
 
 
     const habits = [
@@ -71,17 +72,15 @@ const CabinetPage = () => {
     ];
     return(
         <>
-            <ActionButton>Some shit</ActionButton>
-            <ActionButton onClick={()=>{setOpen(!open)}}>create</ActionButton>
-            <ActionButton onClick={()=>{setEditOpen(!editOpen)}}>update</ActionButton>
-            <CreateHabitModal initialOpen={open} setInitial={setOpen}/>
-            <EditHabitModal initialOpen={editOpen} setInitial={setEditOpen}/>
-            {
-                habits.length > 0 && 
-                habits.slice(0,1).map((habit)=>{
-                    return <HabitCard data={habit} key={habit?.id || uid()} />
-                })
-            }
+            <div className={styles.wrapper}>
+                {
+                    habits.length > 0 ?
+                    <HabitList initialHabits={habits}/>
+                    :
+                    <Loader />
+                }
+            </div>
+
         </>
     );
 }

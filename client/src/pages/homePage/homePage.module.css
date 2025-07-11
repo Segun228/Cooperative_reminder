@@ -1,0 +1,21 @@
+.wrapper{
+    padding: var(--page-main-padding);
+    display: flex;
+    flex-direction: column;
+    gap: var(--page-vertical-gap);
+}
+
+
+.postContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    width: 100%;
+}
+
+
+@media (max-width: 768px) {
+    .postContainer {
+        grid-template-columns: 1fr;
+    }
+}

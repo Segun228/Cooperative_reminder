@@ -6,6 +6,7 @@ import { GiCancel } from "react-icons/gi";
 import EditHabitModal from "../UI/editHabitModal/EditHabitModal";
 import DeleteHabitModal from "../UI/deleteHabitModal/DeleteHabitModal";
 import { useState } from "react";
+import getRandomColorPink from "../../helpers/getRandomColor";
 const HabitCard = ({data}) => {
     const [editModal, setEditModal] = useState(false)
     const [deleteModal, setDeleteModal] = useState(false)
@@ -20,7 +21,7 @@ const HabitCard = ({data}) => {
         <>
             <EditHabitModal habit={data} initialOpen={editModal} setInitial={setEditModal}/>
             <DeleteHabitModal habit={data} initialOpen={deleteModal} setInitial={setDeleteModal}/>
-            <div className={styles.wrapper}>
+            <div className={styles.wrapper} style={{backgroundColor:getRandomColorPink()}}>
                 <section className={styles.section}>
                     <div className={styles.header}>{data?.name || "Habit"}</div>
                     <div className={styles.main}>{data?.description || ""}</div>
