@@ -21,16 +21,18 @@ const mainSlice = createSlice({
         },
 
 
-        handleReset(state){
+        handleLogoutClean(state){
             state.username = ""
             state.habits = []
+            state.userID = null
+            state.telegramID = null
         },
 
 
         setUserInfo(state, action){
             state.userID = action?.payload?.id
             state.username = action?.payload?.username
-            state.username = action?.payload?.telegram_id || null
+            state.telegramID = action?.payload?.telegram_id || null
         }
     }
 }
@@ -39,7 +41,7 @@ const mainSlice = createSlice({
 export const { 
     setHabits,
     addHabbit,
-    handleReset,
+    handleLogoutClean,
     setUserInfo
 } = mainSlice.actions;
 

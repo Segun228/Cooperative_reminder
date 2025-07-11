@@ -114,6 +114,12 @@
     user-select: none;
 }
 
+.capttion{
+    font-size: var(--caption-font);
+    user-select: none;
+    color: var(--light-grey)
+}
+
 
 @media(max-width: 1175px){
     .checkboxCaption{

@@ -24,8 +24,7 @@ const LoginForm = ({isOpen = true}) => {
             {open && <div className={style.background}>
                 <div className={style.wrapper}>
                     <MdOutlineCancel className={style.cancel} onClick={()=>{handleClose()}} />
-                    <div className={style.title}>Hello, stranger</div>
-                    <div className={style.caption}>You need to log in or register to continue</div>
+                    <div className={style.title}>Log in</div>
                     <GithubButton />
                 </div>
             </div>}

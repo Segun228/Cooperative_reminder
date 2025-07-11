@@ -3,7 +3,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { BASE_URL, ACCESS_TOKEN } from "../../../config";
 import axios from "axios";
 import { useEffect, useRef } from "react";
+import GETme from "../../api/requests/GETme";
+import handleLogin from "../../helpers/handleLogin";
+import { useDispatch } from "react-redux";
 const OAuthPage = () => {
+    const dispatch = useDispatch()
     const calledRef = useRef(false);
     const query = new URLSearchParams(useLocation().search);
     const navigate = useNavigate()
@@ -16,14 +20,13 @@ const OAuthPage = () => {
             if(!token){
                 navigate("/login")
             }
-            console.log(token)
             const URL_CALLBACK = BASE_URL + "auth/github/callback?code=" + String(token)
-            console.log("sending the query", URL_CALLBACK)
             const response = await axios.get(URL_CALLBACK)
             if(!response?.data?.token){
                 throw new Error("Invalid token")
             }
             localStorage.setItem(ACCESS_TOKEN, response?.data?.token)
+            await handleLogin(dispatch)
             navigate("/")
         }
         catch(error){
@@ -33,7 +36,6 @@ const OAuthPage = () => {
     }
 
     useEffect(()=>{
-
         getToken()
     }, [])
 

@@ -1,11 +1,11 @@
 import style from "./regForm.module.css"
-import ActionButton from "./../UI/actionButton/ActionButton";
+import ActionButton from "../UI/actionButton/ActionButton";
 import { MdOutlineCancel } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useLocation, useNavigate, Navigate } from "react-router-dom";
-import EyeIcon from "./../eyeIcon/EyeIcon";
+import EyeIcon from "../eyeIcon/EyeIcon";
 const RegisterForm = ({initialOpen = true}) => {
     const [regError, setRegError] = useState("");
     const [input1Type, changeInput1Type] = useState(false);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./cabinetPage.module.css"
-import TelegramButton from "../../components/UI/telegramButton/TelegramButton";
+import TelegramButton from "../../components/telegramButton/TelegramButton";
 import getUserName from "../../helpers/getUserName";
 import getTelegramID from "../../helpers/getTelegramID";
 import { useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import GETme from "../../api/requests/GETme";
 import { BOT_URL } from "../../../config";
 import ActionButton from "../../components/UI/actionButton/ActionButton";
+import handleLogout from "../../helpers/handleLogout";
 
 const CabinetPage = () => {
     const dispatch = useDispatch()
@@ -21,6 +22,12 @@ const CabinetPage = () => {
     const username_fallback = useSelector(state => state.main?.username)
     const tg_fallback = useSelector(state => state.main?.telegramID)
     const userID_fallback = useSelector(state => state.main?.userID)
+
+
+    const handleLogoutCallback = () => {
+        handleLogout(dispatch)
+    }
+
 
     useEffect(()=>{
         const getPageInfo = async () => {
@@ -60,6 +67,10 @@ const CabinetPage = () => {
                     />
                     <ActionButton type="submit">Send</ActionButton>
                 </form>
+                <section className={styles.section}>
+                    <div className={styles.caption}>Log out from the account</div>
+                    <ActionButton onClick={()=>{handleLogout(dispatch, navigate)}}>Log out</ActionButton>
+                </section>
             </div>
         </>
     );

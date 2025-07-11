@@ -1,3 +1,12 @@
+@keyframes wiggle {
+    0%   { transform: rotate(0deg) scale(1); }
+    25%  { transform: rotate(-10deg) scale(1.1); }
+    50%  { transform: rotate(10deg) scale(1.15); }
+    75%  { transform: rotate(-5deg) scale(1.1); }
+    100% { transform: rotate(0deg) scale(1); }
+}
+
+
 .wrapper{
     font-family: Raleway, Robobto, Poppins, Open Sans, Arial;
     width: 100%;
@@ -42,6 +51,10 @@
 .logo{
     width: 3.5vw;
     color: white;
+}
+
+.headerBlock:hover .logo{
+    animation: wiggle 0.4s ease;
 }
 
 .caption{

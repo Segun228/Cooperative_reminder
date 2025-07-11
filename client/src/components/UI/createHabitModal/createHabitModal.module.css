@@ -31,7 +31,6 @@
 .cancel:hover{
     animation: wiggle 0.4s ease;
     transform: scale(1.15);
-
 }
 
 
