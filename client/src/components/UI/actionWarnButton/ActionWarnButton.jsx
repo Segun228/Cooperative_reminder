@@ -1,8 +1,8 @@
-import styles from "./actionButton.module.css";
+import styles from "./actionWarnButton.module.css";
 import { motion } from "framer-motion";
 import { forwardRef } from "react";
 
-const ActionButton = forwardRef(
+const ActionWarnButton = forwardRef(
     ({ onClick = () => {}, reload = false, children, type }, ref) => {
         const handleClick = (e) => {
             if (type !== "submit") {
@@ -26,6 +26,6 @@ const ActionButton = forwardRef(
     }
 );
 
-ActionButton.displayName = "ActionButton";
-export const MActionButton = motion(ActionButton);
-export default ActionButton;
+ActionWarnButton.displayName = "ActionWarnButton";
+export const MActionButton = motion(ActionWarnButton);
+export default ActionWarnButton;
