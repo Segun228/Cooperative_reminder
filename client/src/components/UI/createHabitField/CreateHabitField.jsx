@@ -62,7 +62,7 @@ const handleSubmit = (e) => {
                     onChange={(e) => setName(e.target.value)}
                 />
                 <textarea  
-                    placeholder={placeholder || "Add description..."}
+                    placeholder={placeholder || "Add description (optional)"}
                     className={styles.field}
                     name="answer"
                     value={body}

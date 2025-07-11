@@ -13,6 +13,7 @@ const EditHabitField = ({ data, sender, settings, placeholder, caption }) => {
     const [startDate, setStartDate] = useState("");
 
     useEffect(() => {
+        console.log(data)
         if (data) {
         setName(data?.name || "");
         setBody(data?.description || "");

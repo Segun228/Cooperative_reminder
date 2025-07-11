@@ -4,14 +4,14 @@ import { BASE_URL, HABIT_URL,  } from "../../../config"
 const POSThabit = async ({name, description, frequency, remind_time, timezone, start_date}) => {
     const NEW_URL = BASE_URL + HABIT_URL
     try{
-        if(!name || !description || !frequency || !remind_time || !timezone || !start_date){
+        if(!name || !frequency || !remind_time || !timezone || !start_date){
             throw new Error("Invalid fields of a habit given")
         }
         const response = await api.post(
             NEW_URL,
             {
                 name,
-                description,
+                "description":description,
                 frequency,
                 remind_time,
                 timezone,

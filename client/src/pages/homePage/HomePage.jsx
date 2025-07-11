@@ -78,11 +78,10 @@ const CabinetPage = () => {
             <EditHabitModal initialOpen={editOpen} setInitial={setEditOpen}/>
             {
                 habits.length > 0 && 
-                habits.map((habit)=>{
+                habits.slice(0,1).map((habit)=>{
                     return <HabitCard data={habit} key={habit?.id || uid()} />
                 })
             }
-            <DeleteHabitModal initialOpen={true} setInitial={()=>{}}/>
         </>
     );
 }
