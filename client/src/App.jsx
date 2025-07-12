@@ -7,7 +7,7 @@ import NotFoundPage from './pages/notFoundPage/NotFoundPage.jsx';
 import Layout from './pages/layout/Layout.jsx';
 import HomePage from "./pages/homePage/HomePage.jsx"
 import CabinetPage from './pages/cabinetPage/CabinetPage.jsx';
-import LoginPage from './pages/loginPage/LogInPage.jsx';
+import LoginPage from './pages/loginPage/LoginPage.jsx';
 import RegisterPage from './pages/registerPage/RegisterPage.jsx';
 import AdminPage from './pages/adminPage/AdminPage.jsx';
 import RequireAuth from './security/RequireAuth.jsx';
