@@ -1,4 +1,4 @@
-export const BASE_URL = import.meta.env.VITE_API_URL
+export const BASE_URL = "https://re-minder.onrender.com/"
 export const HABIT_URL = "api/habits/"
 export const HABIT_USER_URL = "api/habits/user/"
 export const USER_URL = "api/users/"
