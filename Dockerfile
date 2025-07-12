@@ -1,18 +1,11 @@
+# ========== 1. Сборка приложения ==========
 FROM node:20 AS build
-
 WORKDIR /app
-
-COPY client ./client
+COPY ./client ./client
 WORKDIR /app/client
+RUN npm install --legacy-peer-deps && npm run build
 
-RUN npm install --legacy-peer-deps
-RUN npm run build
-
-
-FROM nginx:alpine AS production
-
+# ========== 2. Раздача через nginx ==========
+FROM nginx:1.29-alpine
 COPY --from=build /app/client/dist /usr/share/nginx/html
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
