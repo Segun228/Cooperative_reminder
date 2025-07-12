@@ -1,10 +1,10 @@
 .background {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 150%;
-    z-index: 1;
+    z-index: 90;
     display: flex;
     background-color: rgba(157, 157, 157, 0.8);
     align-items: center;
@@ -57,7 +57,7 @@
 
 .wrapper {
     position: absolute;
-    z-index: 2;
+    z-index: 100;
     left: 30vw;
     top: 10vh;
     margin-bottom: 20vh;

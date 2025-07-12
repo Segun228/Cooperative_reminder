@@ -50,7 +50,7 @@ const DeleteHabitModal = ({initialOpen, setInitial, onClose, submitter, habit}) 
                             <>
                                 <>
                                     <div>Are you sure you want to delete:</div>
-                                    <div>{habit?.name}</div>
+                                    <div className={styles.metatitle} style={{color:"red"}}>{habit?.name}</div>
                                     <ActionWarnButton onClick={()=>{deletePost(habit?.id)}}>Delete</ActionWarnButton>
                                 </>
                                 {error && 

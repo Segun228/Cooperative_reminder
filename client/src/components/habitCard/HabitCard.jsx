@@ -7,7 +7,7 @@ import EditHabitModal from "../UI/editHabitModal/EditHabitModal";
 import DeleteHabitModal from "../UI/deleteHabitModal/DeleteHabitModal";
 import { useState } from "react";
 import getRandomColorPink from "../../helpers/getRandomColor";
-const HabitCard = ({data}) => {
+const HabitCard = ({data, dragHandleProps}) => {
     const [editModal, setEditModal] = useState(false)
     const [deleteModal, setDeleteModal] = useState(false)
 
@@ -30,7 +30,7 @@ const HabitCard = ({data}) => {
                         <BsThreeDots className={styles.logo} onClick={()=>{setEditModal(true)}}/>
                     </div>
                 </section>
-                <FaList className={styles.moveLogo} />
+                <FaList className={styles.moveLogo} {...dragHandleProps}/>
                 <GiCancel className={styles.deletelogo} onClick={()=>{setDeleteModal(true)}}/>
             </div>
         </>

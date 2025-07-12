@@ -13,63 +13,15 @@ import { uid } from "uid";
 import DeleteHabitModal from "../../components/UI/deleteHabitModal/DeleteHabitModal";
 import HabitList from "../../components/sortableHabit/SortableHabit";
 import Loader from "../../components/loader/Loader";
+import { useNavigate } from "react-router-dom";
+import useScrollToTop from "../../hooks/useScrollToTop";
 
 const CabinetPage = () => {
+    useScrollToTop()
+    const navigate = useNavigate()
+    const [habits, setHabits] = useState([])
 
 
-
-    const habits = [
-        {
-            id: 1,
-            user_id: 1,
-            name: "Read a book",
-            description: "Read 20 pages of a non-fiction book.",
-            frequency: "daily",
-            remind_time: "21:00:00",
-            timezone: "UTC",
-            start_date: "2025-07-01T00:00:00Z"
-        },
-        {
-            id: 2,
-            user_id: 1,
-            name: "Morning exercise",
-            description: "Do a 15-minute stretch or workout.",
-            frequency: "daily",
-            remind_time: "07:00:00",
-            timezone: "UTC",
-            start_date: "2025-07-01T00:00:00Z"
-        },
-        {
-            id: 3,
-            user_id: 1,
-            name: "Journal writing",
-            description: "Write a short reflection about your day.",
-            frequency: "daily",
-            remind_time: "22:30:00",
-            timezone: "UTC",
-            start_date: "2025-07-01T00:00:00Z"
-        },
-        {
-            id: 4,
-            user_id: 1,
-            name: "Drink water",
-            description: "Drink at least 2 liters of water.",
-            frequency: "daily",
-            remind_time: "12:00:00",
-            timezone: "UTC",
-            start_date: "2025-07-01T00:00:00Z"
-        },
-        {
-            id: 5,
-            user_id: 1,
-            name: "Learn coding",
-            description: "Spend 1 hour solving coding problems.",
-            frequency: "daily",
-            remind_time: "18:00:00",
-            timezone: "UTC",
-            start_date: "2025-07-01T00:00:00Z"
-        }
-    ];
     return(
         <>
             <div className={styles.wrapper}>
@@ -79,6 +31,10 @@ const CabinetPage = () => {
                     :
                     <Loader />
                 }
+                <section className={styles.lowerSection}>
+                    <div className={styles.title}>Start up a new habit</div>
+                    <ActionButton onClick={()=>{navigate("/create")}}>Create</ActionButton>
+                </section>
             </div>
 
         </>

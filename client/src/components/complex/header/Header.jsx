@@ -8,6 +8,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { AiFillBulb } from "react-icons/ai";
 import getUserName from "../../../helpers/getUserName";
 
+
+                        /*<NavLink to="/dashboard" className={styles.navItemLink}>
+                            <AnimatePresence>
+                                {activeCurrentIndex === 2 && <Line />}
+                            </AnimatePresence>
+                            <div onClick={() => handleClick(2)} className={styles.navItem}>Dashboard</div>
+                        </NavLink>
+                        
+                        
+                        <NavLink to="/dashboard" onClick={() => handleClick(2)} className={styles.navSideItem}>Dashboard</NavLink>
+                        */
+
+
 const Header = () => {
     const [activeIndex, setActiveIndex] = useState(-1);
     const [username, setUsername] = useState(null);
@@ -25,7 +38,7 @@ const Header = () => {
         switch (location.pathname) {
             case "/": return 0;
             case "/create": return 1;
-            case "/dashboard": return 2;
+            // case "/dashboard": return 2;
             case "/cabinet": return 3;
             default: return -1;
         }
@@ -65,12 +78,12 @@ const Header = () => {
                             </AnimatePresence>
                             <div onClick={() => handleClick(1)} className={styles.navItem}>Create</div>
                         </NavLink>
-                        <NavLink to="/dashboard" className={styles.navItemLink}>
-                            <AnimatePresence>
-                                {activeCurrentIndex === 2 && <Line />}
-                            </AnimatePresence>
-                            <div onClick={() => handleClick(2)} className={styles.navItem}>Dashboard</div>
-                        </NavLink>
+
+
+
+
+
+
                         <NavLink to="/cabinet" className={styles.navItemLink}>
                             <AnimatePresence>
                                 {activeCurrentIndex === 3 && <Line />}
@@ -92,12 +105,11 @@ const Header = () => {
 
 
             <div className={`${styles.sideMenu} ${isMenuOpen ? styles.sideMenuOpen : ""}`}>
-                <NavLink to="/cabinet" onClick={() => handleClick(3)} className={styles.navSideItem}>
-                    {username || "Log in"}
-                </NavLink>
                 <NavLink to="/" onClick={() => handleClick(0)} className={styles.navSideItem}>Home</NavLink>
                 <NavLink to="/create" onClick={() => handleClick(1)} className={styles.navSideItem}>Create</NavLink>
-                <NavLink to="/dashboard" onClick={() => handleClick(2)} className={styles.navSideItem}>Dashboard</NavLink>
+
+
+
                 <NavLink to="/cabinet" onClick={() => handleClick(3)} className={styles.navSideItem}>{username || store_username || "Log in"}</NavLink>
             </div>
         </>

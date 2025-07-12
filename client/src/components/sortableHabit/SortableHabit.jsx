@@ -29,12 +29,12 @@ function SortableHabit({ data }) {
     const style = {
         transform: CSS.Transform.toString(transform),
         transition,
-        touchAction: "none", // предотвращает "липкие" перетаскивания на мобилках
+        touchAction: "none",
     };
 
     return (
-        <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-        <HabitCard data={data} />
+        <div ref={setNodeRef} style={style} {...attributes} >
+            <HabitCard data={data} dragHandleProps={listeners}/>
         </div>
     );
     }

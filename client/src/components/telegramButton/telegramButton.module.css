@@ -4,7 +4,6 @@
     align-items: center;
     justify-content: center;
     height: 11.5vh;
-    min-width: 15vw;
     width: max-content;
     border-radius: var(--border-radius);
     background-color: #24A1DE;
@@ -19,7 +18,7 @@
 }
 
 .caption{
-    font-size: 3vh;
+    font-size: var(--primary-font);
     font-weight: 600;
 }
 
