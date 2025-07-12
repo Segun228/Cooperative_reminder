@@ -15,19 +15,32 @@ import HabitList from "../../components/sortableHabit/SortableHabit";
 import Loader from "../../components/loader/Loader";
 import { useNavigate } from "react-router-dom";
 import useScrollToTop from "../../hooks/useScrollToTop";
+import setupHabits from "../../helpers/setupHabits";
+import { useDispatch, useSelector } from "react-redux";
+import refreshHabits from "../../helpers/refreshHabits";
 
-const CabinetPage = () => {
+const HomePage = () => {
     useScrollToTop()
     const navigate = useNavigate()
-    const [habits, setHabits] = useState([])
+    const dispatch = useDispatch()
+
+    const initialStorageHabits = useSelector(state => state.main.habits)
+
+
+    useEffect(() => {
+        const loadHabits = async () => {
+            await refreshHabits(dispatch)
+        };
+        loadHabits();
+    }, []);
 
 
     return(
         <>
             <div className={styles.wrapper}>
                 {
-                    habits.length > 0 ?
-                    <HabitList initialHabits={habits}/>
+                    initialStorageHabits && initialStorageHabits.length > 0 ?
+                    <HabitList />
                     :
                     <Loader />
                 }
@@ -41,4 +54,4 @@ const CabinetPage = () => {
     );
 }
 
-export default CabinetPage;
+export default HomePage;

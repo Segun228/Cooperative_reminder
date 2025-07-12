@@ -2,7 +2,7 @@ import './App.css'
 import { Routes } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 import { Suspense, lazy, use } from 'react';
-import useSmoothScroll from "./hooks/useSmoothScroll.js"
+import useSmoothScroll from "./hooks/useSmoothScroll.jsx"
 import NotFoundPage from './pages/notFoundPage/NotFoundPage.jsx';
 import Layout from './pages/layout/Layout.jsx';
 import HomePage from "./pages/homePage/HomePage.jsx"

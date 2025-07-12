@@ -29,9 +29,10 @@ const handleSubmit = (e) => {
     const habitData = {
         name,
         body,
-        frequency: frequency?.value || "",
+        frequency: frequency.value || "",
         time,
-        timeZone: timeZone?.value || "",
+        timeZone: timeZone.value || "",
+        start_date: data?.start_date
     };
     if (typeof sender === "function") {
         sender(habitData);
@@ -75,6 +76,7 @@ const handleSubmit = (e) => {
                 <div className={styles.caption}>{"Select remind time"}</div>
                 <input  
                     type="time"
+                    step="1"
                     placeholder={"Add frequency..."}
                     className={styles.input}
                     name="time"

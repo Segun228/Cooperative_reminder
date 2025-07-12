@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
     DndContext,
     closestCenter,
@@ -16,6 +16,8 @@ import { restrictToParentElement } from "@dnd-kit/modifiers";
 import { CSS } from "@dnd-kit/utilities";
 import styles from "./sortableHabit.module.css";
 import HabitCard from "./../habitCard/HabitCard.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { setHabits } from "../../store/slices/mainSlice"; // обновление из стора
 
 function SortableHabit({ data }) {
     const {
@@ -33,14 +35,15 @@ function SortableHabit({ data }) {
     };
 
     return (
-        <div ref={setNodeRef} style={style} {...attributes} >
-            <HabitCard data={data} dragHandleProps={listeners}/>
+        <div ref={setNodeRef} style={style} {...attributes}>
+            <HabitCard data={data} dragHandleProps={listeners} />
         </div>
     );
-    }
+}
 
-    export default function HabitList({ initialHabits }) {
-    const [habits, setHabits] = useState(initialHabits);
+export default function HabitList() {
+    const dispatch = useDispatch();
+    const habits = useSelector(state => state.main.habits);
     const sensors = useSensors(useSensor(PointerSensor));
 
     const handleDragEnd = (event) => {
@@ -49,26 +52,24 @@ function SortableHabit({ data }) {
 
         const oldIndex = habits.findIndex((item) => item.id === active.id);
         const newIndex = habits.findIndex((item) => item.id === over.id);
-
-        setHabits((items) => arrayMove(items, oldIndex, newIndex));
     };
 
     return (
         <DndContext
-        sensors={sensors}
-        collisionDetection={closestCenter}
-        modifiers={[restrictToParentElement]}
-        onDragEnd={handleDragEnd}
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            modifiers={[restrictToParentElement]}
+            onDragEnd={handleDragEnd}
         >
-        <SortableContext items={habits.map((h) => h.id)} strategy={rectSortingStrategy}>
-            <div className={styles.wrapper}>
-            <div className={styles.postContainer}>
-                {habits.map((habit) => (
-                <SortableHabit data={habit} key={habit.id} />
-                ))}
-            </div>
-            </div>
-        </SortableContext>
+            <SortableContext items={habits.map(h => h.id)} strategy={rectSortingStrategy}>
+                <div className={styles.wrapper}>
+                    <div className={styles.postContainer}>
+                        {habits.map(habit => (
+                            <SortableHabit data={habit} key={habit.id} />
+                        ))}
+                    </div>
+                </div>
+            </SortableContext>
         </DndContext>
     );
 }

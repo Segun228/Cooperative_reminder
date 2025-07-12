@@ -12,12 +12,24 @@ const mainSlice = createSlice({
     },
     reducers:{
         setHabits(state, action){
-            state.habits = action?.payload?.habits
+            state.habits = action?.payload
         },
 
 
-        addHabbit(state, action){
-            state.habits.join(action?.payload?.habit)
+        addHabit(state, action) {
+            state.habits.push(action.payload);
+        },
+
+        editHabit(state, action) {
+            const newHabit = action.payload;
+            state.habits = state.habits.map(habit =>
+                habit.id === newHabit.id ? newHabit : habit
+            );
+        },
+
+        deleteHabit(state, action) {
+            const habitId = action.payload;
+            state.habits = state.habits.filter(habit => habit.id !== habitId);
         },
 
 
@@ -40,7 +52,9 @@ const mainSlice = createSlice({
 
 export const { 
     setHabits,
-    addHabbit,
+    addHabit,
+    editHabit,
+    deleteHabit,
     handleLogoutClean,
     setUserInfo
 } = mainSlice.actions;

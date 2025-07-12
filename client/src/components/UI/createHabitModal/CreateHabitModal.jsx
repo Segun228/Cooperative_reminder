@@ -5,12 +5,17 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import CreateHabitField from "../createHabitField/CreateHabitField";
 import POSThabit from "../../../api/requests/POSThabit";
+import refreshHabits from "../../../helpers/refreshHabits";
+import { useDispatch } from "react-redux";
+import { addHabit } from "../../../store/slices/mainSlice";
 
-const CreateHabitModal = ({initialOpen, setInitial, onClose, submitter}) => {
+
+const CreateHabitModal = ({initialOpen, setInitial, onClose = ()=>{}, submitter}) => {
     
     const [open, setOpen] = useState(initialOpen || false);
     const [error, setError] = useState(null)
 
+    const dispatch = useDispatch()
     useEffect(
         ()=>{
             setOpen(initialOpen)
@@ -39,24 +44,26 @@ const CreateHabitModal = ({initialOpen, setInitial, onClose, submitter}) => {
         timeZone,
         startDate
     }) => {
-        const data = {
-            name,
-            description: body,
-            frequency,
-            remind_time: time,
-            timezone: timeZone,
-            start_date: startDate
+        try{
+            const data = {
+                name,
+                description: body,
+                frequency,
+                remind_time: time,
+                timezone: timeZone,
+                start_date: startDate
+            }
+                const response = await POSThabit(data)
+                dispatch(addHabit(response.data))
+                setInitial(false)
+                setOpen(false)
+                setTimeout(100)
+                setInitial(true)
+                setOpen(true)
         }
-        const response = await POSThabit(data)
-        if(response?.error){
-            setError(response?.error)
-            setInitial(true)
-            setOpen(true)
-        }
-        else{
-            setInitial(false)
-            setOpen(false)
-            setTimeout(100)
+        catch(error){
+            console.error(error)
+            setError(error)
             setInitial(true)
             setOpen(true)
         }

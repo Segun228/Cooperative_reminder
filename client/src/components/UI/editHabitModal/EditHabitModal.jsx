@@ -5,11 +5,17 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import EditHabitField from "../editHabitField/EditHabitField";
 import PUThabit from "../../../api/requests/PUThabit";
+import refreshHabits from "../../../helpers/refreshHabits";
+import { useDispatch } from "react-redux";
+import { editHabit } from "../../../store/slices/mainSlice";
 
 const EditHabitModal = ({initialOpen, setInitial, habit}) => {
     
     const [open, setOpen] = useState(initialOpen || false);
     const [error, setError] = useState(null)
+
+
+    const dispatch = useDispatch()
 
     useEffect(
         ()=>{
@@ -36,26 +42,31 @@ const EditHabitModal = ({initialOpen, setInitial, habit}) => {
         frequency,
         time,
         timeZone,
+        start_date
     }) => {
-        setError(null);
-        const data = {
-            name,
-            description: body,
-            frequency,
-            remind_time: time,
-            timezone: timeZone,
-        }
-        const response = await PUThabit(data, habit?.id)
-        console.log("error response", response)
-        if(response?.error){
-            setError(response?.error)
-            setInitial(true)
-            setOpen(true)
-        }
-        else{
+        try{
+            setError(null);
+            const data = {
+                name,
+                description: body,
+                frequency,
+                remind_time: time,
+                timezone: timeZone,
+                start_date
+            }
+            const response = await PUThabit(data, habit?.id)
+            console.log(response)
+            dispatch(editHabit(response))
             setInitial(false)
             setOpen(false)
         }
+        catch(error){
+            console.error(error)
+            setError(error)
+            setInitial(true)
+            setOpen(true)
+        }
+        
     }
     return( 
         <>

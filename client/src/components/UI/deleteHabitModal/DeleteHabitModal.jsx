@@ -2,14 +2,17 @@ import styles from "./deleteHabitModal.module.css"
 import ActionButton from "../actionButton/ActionButton";
 import { MdOutlineCancel } from "react-icons/md";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DELETEhabit from "../../../api/requests/DELETEhabit";
 import ActionWarnButton from "../actionWarnButton/ActionWarnButton";
+import refreshHabits from "../../../helpers/refreshHabits";
+import { deleteHabit } from "../../../store/slices/mainSlice";
 
-const DeleteHabitModal = ({initialOpen, setInitial, onClose, submitter, habit}) => {
+const DeleteHabitModal = ({initialOpen, setInitial, onClose = ()=>{}, submitter, habit}) => {
     
     const [open, setOpen] = useState(initialOpen || false);
     const [error, setError] = useState(null)
+    const dispatch = useDispatch()
 
     useEffect(
         ()=>{
@@ -28,16 +31,20 @@ const DeleteHabitModal = ({initialOpen, setInitial, onClose, submitter, habit}) 
 
 
     const deletePost = async (id) => {
-        const response = await DELETEhabit(id)
-        if(response?.error){
-            setError(response?.error)
+        try{
+            await DELETEhabit(id)
+            dispatch(deleteHabit(id))
+            setError(false)
+            handleClose()
+        }
+        catch(error){
+            console.log(error)
+            setError(error)
             setInitial(true)
             setOpen(true)
         }
-        else{
-            handleClose()
-        }
     }
+    
     return( 
         <>
             {open && 
