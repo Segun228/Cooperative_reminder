@@ -23,7 +23,7 @@ const mainSlice = createSlice({
         editHabit(state, action) {
             const newHabit = action.payload;
             state.habits = state.habits.map(habit =>
-                habit.id === newHabit.id ? newHabit : habit
+                habit.id === newHabit?.id ? newHabit : habit
             );
         },
 

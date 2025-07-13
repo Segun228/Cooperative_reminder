@@ -25,7 +25,7 @@ const HabitCard = ({data, dragHandleProps}) => {
                 <section className={styles.section}>
                     <div className={styles.header}>{data?.name || "Habit"}</div>
                     <div className={styles.main}>{data?.description || ""}</div>
-                    <div className={styles.caption}>{data?.frequency || ""} notifications at {trimSeconds(data?.remind_time) || ""}</div>
+                    <div className={styles.caption}>{data?.frequency || ""} notifications at {trimSeconds(data?.remind_time || "00:00:00") || ""}</div>
                     <div className={styles.actionBlock}>
                         <BsThreeDots className={styles.logo} onClick={()=>{setEditModal(true)}}/>
                     </div>

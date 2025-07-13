@@ -18,6 +18,7 @@ import styles from "./sortableHabit.module.css";
 import HabitCard from "./../habitCard/HabitCard.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { setHabits } from "../../store/slices/mainSlice"; // обновление из стора
+import Loader from "../loader/Loader.jsx";
 
 function SortableHabit({ data }) {
     const {
@@ -26,7 +27,7 @@ function SortableHabit({ data }) {
         setNodeRef,
         transform,
         transition,
-    } = useSortable({ id: data.id });
+    } = useSortable({ id: data?.id });
 
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -46,12 +47,25 @@ export default function HabitList() {
     const habits = useSelector(state => state.main.habits);
     const sensors = useSensors(useSensor(PointerSensor));
 
+
+    if (!Array.isArray(habits) || habits.length === 0) {
+        return <Loader />;
+    }
+
+    
+    const validHabits = habits.filter(habit => habit && typeof habit.id !== 'undefined' && habit.id !== null);
+
     const handleDragEnd = (event) => {
         const { active, over } = event;
         if (!over || active.id === over.id) return;
 
-        const oldIndex = habits.findIndex((item) => item.id === active.id);
-        const newIndex = habits.findIndex((item) => item.id === over.id);
+        const oldIndex = validHabits.findIndex(item => item?.id === active?.id);
+        const newIndex = validHabits.findIndex(item => item?.id === over?.id);
+
+        if (oldIndex === -1 || newIndex === -1) return;
+
+        const newHabits = arrayMove(validHabits, oldIndex, newIndex);
+        dispatch(setHabits(newHabits));
     };
 
     return (
@@ -61,12 +75,16 @@ export default function HabitList() {
             modifiers={[restrictToParentElement]}
             onDragEnd={handleDragEnd}
         >
-            <SortableContext items={habits.map(h => h.id)} strategy={rectSortingStrategy}>
+            <SortableContext items={validHabits.map(h => h.id)} strategy={rectSortingStrategy}>
                 <div className={styles.wrapper}>
                     <div className={styles.postContainer}>
-                        {habits.map(habit => (
-                            <SortableHabit data={habit} key={habit.id} />
-                        ))}
+                        {validHabits.length > 0 ? (
+                            validHabits.map(habit => (
+                                <SortableHabit data={habit} key={habit.id} />
+                            ))
+                        ) : (
+                            <Loader />
+                        )}
                     </div>
                 </div>
             </SortableContext>
