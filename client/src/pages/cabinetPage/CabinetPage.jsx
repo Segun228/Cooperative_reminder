@@ -10,6 +10,7 @@ import GETme from "../../api/requests/GETme";
 import { BOT_URL } from "../../../config";
 import ActionButton from "../../components/UI/actionButton/ActionButton";
 import handleLogout from "../../helpers/handleLogout";
+import POSTfeedback from "../../api/requests/POSTfeedback";
 
 const CabinetPage = () => {
     const dispatch = useDispatch()
@@ -47,6 +48,14 @@ const CabinetPage = () => {
         getPageInfo()
     }, [])
 
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        setFeedback("")
+        await POSTfeedback(feedback)
+        console.log("Feedback sent")
+    }
+
     return(
         <>
             <div className={styles.wrapper}>
@@ -56,7 +65,7 @@ const CabinetPage = () => {
                     <div className={styles.caption}>Turn on BOT notifications to stay consistent</div>
                     <TelegramButton disabled={!userID} onClickFunction={()=>{window.location.href = (BOT_URL)}}/>
                 </section>
-                <form className={styles.form} onSubmit={(e)=>{e.preventDefault()}}>
+                <form className={styles.form} onSubmit={(e)=>{handleSubmit(e)}}>
                     <div className={styles.caption}>You can leave your comliants or suggestions there</div>
                     <textarea  
                         placeholder={"Express yourself..."}

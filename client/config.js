@@ -4,6 +4,7 @@ export const HABIT_USER_URL = "api/habits/user/"
 export const USER_URL = "api/users/"
 export const ME_URL = "api/me/"
 export const BOT_URL = "http://localhost:5173/"
+export const FEEDBACK_URL = "https://cooperative-reminder-feedback.onrender.com/api/"
 
 
 export const ACCESS_TOKEN = "access"
